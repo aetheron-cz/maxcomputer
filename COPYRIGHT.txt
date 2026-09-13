@@ -1,0 +1,30 @@
+MAX COMPUTER — website design preview
+=====================================
+
+Design & code © 2026 Aetheron. All rights reserved.
+
+This is an unsolicited design proposal ("ukázka návrhu") prepared for
+MAX COMPUTER (Řeporyjské nám. 9, 155 00 Praha 5 – Řeporyje, IČO 48093513).
+
+No part of this work — HTML, CSS, JavaScript, layout, artwork or copy —
+may be copied, reproduced, distributed, modified, reused or deployed,
+in whole or in part, without the prior written consent of the author.
+Ownership transfers only upon a signed agreement and full payment.
+
+Third-party material used in this preview:
+  · Product photography, ESET certificate, shop photo and logo artwork
+    remain the property of MAX COMPUTER and their respective brand owners
+    (Acer, Brother, ESET, Trodat, TeamViewer).
+  · Photographs of repair work sourced from Unsplash under the Unsplash
+    License; they are placeholders and are intended to be replaced with
+    the client's own photography.
+
+---
+
+Design a kód © 2026 Aetheron. Všechna práva vyhrazena.
+
+Toto je nabídková ukázka návrhu webu vytvořená pro firmu MAX COMPUTER.
+Jakékoli kopírování, rozmnožování, šíření, úprava nebo použití celku
+i jednotlivých částí (HTML, CSS, JavaScript, grafika, texty) bez
+předchozího písemného souhlasu autora je zakázáno. Práva k dílu
+přecházejí na objednatele až podpisem smlouvy a úplným uhrazením ceny.

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  MAX COMPUTER  ·  ukázka návrhu nového webu
+  Design & kód © 2026 Aetheron. Všechna práva vyhrazena / All rights reserved.
+
+  Tento soubor je nabídková ukázka (návrh) vytvořená pro firmu MAX COMPUTER.
+  Jakékoli kopírování, šíření, úprava nebo použití celku i částí (HTML, CSS,
+  JS, grafika, texty) bez písemného souhlasu autora je zakázáno.
+  ============================================================================
+-->
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAX COMPUTER · prodej a servis počítačů, Praha 5 Řeporyje</title>
+<meta name="description" content="Prodej a servis počítačů, tiskáren a příslušenství v Praze 5 – Řeporyjích. Od roku 1993. Zlatý partner ESET, specialisté na ACER a BROTHER. Servis u vás i na dálku, razítka TRODAT.">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+<meta name="author" content="Aetheron">
+<meta name="copyright" content="© 2026 Aetheron — všechna práva vyhrazena">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MAX COMPUTER — prodej a servis počítačů">
+<meta property="og:description" content="Od roku 1993 na Řeporyjském náměstí. Prodej, servis, odvirování a ochrana ESET.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>
+/* Úvodní animace: dlaždice najedou postupně. Třída se nasadí před prvním vykreslením. */
+(function () {
+  var d = document.documentElement;
+  if (location.hash) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  d.classList.add('intro', 'anim');
+  var done = false;
+  function play() {
+    if (done) return; done = true;
+    d.classList.remove('intro');
+    setTimeout(function () { d.classList.remove('anim'); }, 1600);
+  }
+  window.addEventListener('wheel', play, { passive: true, once: true });
+  window.addEventListener('touchstart', play, { passive: true, once: true });
+  window.addEventListener('keydown', play, { once: true });
+  window.addEventListener('load', function () { setTimeout(play, 120); });
+  setTimeout(play, 2500);
+})();
+</script>
+</head>
+<body id="top">
+
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="#top" aria-label="MAX COMPUTER, úvod">
+      <img class="brand__logo" src="images/logo-max.png" alt="MAX COMPUTER">
+    </a>
+
+    <nav class="nav__links" aria-label="Hlavní navigace">
+      <a href="#cenik">Služby a ceník</a>
+      <a href="#ochrana">Ochrana</a>
+      <a href="#produkty">Prodejna</a>
+      <a href="#razitka">Razítka</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <div class="nav__right">
+      <span class="status" id="status" aria-live="polite"><i class="status__dot"></i><b class="status__state">Otevírací doba</b><span class="status__more"></span></span>
+      <a class="tel" href="tel:+420770130605"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6.2 2.8 4.1 3.3c-.7.2-1.2.8-1.1 1.6.6 6.3 5.8 11.5 12.1 12.1.8.1 1.4-.4 1.6-1.1l.5-2.1c.2-.7-.2-1.4-.9-1.7l-2.4-1c-.6-.2-1.2 0-1.6.4l-.9 1.1c-2-1-3.6-2.6-4.6-4.6l1.1-.9c.5-.4.7-1 .4-1.6l-1-2.4c-.3-.7-1-1.1-1.7-.9Z" fill="currentColor"/></svg><span>770&nbsp;130&nbsp;605</span></a>
+      <button class="burger" id="burger" aria-label="Otevřít menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <nav class="drawer__nav" aria-label="Mobilní navigace">
+    <a href="#cenik">Služby a ceník</a>
+    <a href="#dalka">Pomoc na dálku</a>
+    <a href="#ochrana">Ochrana ESET</a>
+    <a href="#produkty">Prodejna</a>
+    <a href="#razitka">Razítka</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+  <div class="drawer__foot">
+    <a href="tel:+420770130605">+420 770 130 605</a>
+    <a href="mailto:info@maxcomputer.cz">info@maxcomputer.cz</a>
+    <p>Řeporyjské náměstí 9, 155 00 Praha 5</p>
+  </div>
+</div>
+
+<main id="obsah">
+
+  <!-- ══ HERO: DLAŽDICE ════════════════════════════════════════════ -->
+  <section class="bento" aria-label="Úvod">
+
+    <div class="slides" id="slides" aria-roledescription="carousel" aria-label="Nabídka prodejny">
+
+      <article class="slide slide--acer is-active" aria-roledescription="slide" aria-label="1 ze 4">
+        <div class="slide__copy">
+          <p class="slide__tag">Na prodejně v Řeporyjích</p>
+          <h2 class="slide__h">Notebooky Acer</h2>
+          <p class="slide__sub">Od 9&nbsp;990&nbsp;Kč. Poradíme s výběrem a rovnou nainstalujeme, co potřebujete.</p>
+          <a class="btn btn--solid btn--lg" href="#produkty">Vybrat notebook</a>
+        </div>
+        <div class="slide__art" aria-hidden="true">
+          <img class="slide__img slide__img--back" src="images/acer-aspire5.jpg" alt="">
+          <img class="slide__img slide__img--front" src="images/acer-swift-edge.png" alt="">
+        </div>
+      </article>
+
+      <article class="slide slide--brother" aria-roledescription="slide" aria-label="2 ze 4" aria-hidden="true">
+        <div class="slide__copy">
+          <p class="slide__tag">Od 3&nbsp;889&nbsp;Kč</p>
+          <h2 class="slide__h">Tiskárny Brother</h2>
+          <p class="slide__sub">Model DCP-T730DW vytiskne stranu A4 za 7&nbsp;haléřů. Náplně originální i alternativní.</p>
+          <a class="btn btn--solid btn--lg" href="#produkty">Vybrat tiskárnu</a>
+        </div>
+        <div class="slide__art" aria-hidden="true">
+          <img class="slide__img slide__img--solo" src="images/brother-t730dw.jpg" alt="">
+        </div>
+      </article>
+
+      <article class="slide slide--sale" aria-roledescription="slide" aria-label="3 ze 4" aria-hidden="true">
+        <div class="slide__copy">
+          <p class="slide__tag slide__tag--hot">Doprodej · poslední kus</p>
+          <h2 class="slide__h">Acer eKinekt BD3</h2>
+          <p class="slide__sub">Pracovní stůl s rotopedem, který šlapáním dobíjí kancelářská zařízení. Teď za 17&nbsp;940&nbsp;Kč.</p>
+          <a class="btn btn--solid btn--lg" href="#kontakt">Mám zájem</a>
+        </div>
+        <div class="slide__art" aria-hidden="true">
+          <span class="slide__badge">−40 %</span>
+          <img class="slide__img slide__img--solo" src="images/acer-ekinekt.jpg" alt="">
+        </div>
+      </article>
+
+      <article class="slide slide--photo" aria-roledescription="slide" aria-label="4 ze 4" aria-hidden="true">
+        <img class="slide__bg" src="images/hero-deska.jpg" alt="">
+        <div class="slide__copy">
+          <p class="slide__tag">Na objednávku</p>
+          <h2 class="slide__h">Počítač postavený na míru</h2>
+          <p class="slide__sub">Řeknete, k čemu ho potřebujete. Postavíme ho přesně podle toho, i s instalací systému.</p>
+          <a class="btn btn--solid btn--lg" href="#kontakt">Nezávazná poptávka</a>
+        </div>
+      </article>
+
+      <button class="slides__arrow slides__arrow--prev" type="button" aria-label="Předchozí snímek">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4 6.5 10l6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="slides__arrow slides__arrow--next" type="button" aria-label="Další snímek">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.5 4 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="slides__dots">
+        <button type="button" class="is-active" aria-label="Snímek 1: Notebooky Acer" aria-current="true"></button>
+        <button type="button" aria-label="Snímek 2: Tiskárny Brother"></button>
+        <button type="button" aria-label="Snímek 3: Doprodej"></button>
+        <button type="button" aria-label="Snímek 4: Počítač na míru"></button>
+      </div>
+    </div>
+
+    <div class="tile-eset">
+      <div class="tile-eset__copy">
+        <p class="kick"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="8" r="5.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6.6 12.4 5 19l5-2.4L15 19l-1.6-6.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg> Zlatý partner ESET od&nbsp;2004</p>
+        <h2>Ochrana počítačů</h2>
+        <p>ESET NOD32 Antivirus od 1&nbsp;209&nbsp;Kč na rok. Nainstalujeme ho a nastavíme.</p>
+        <a class="btn btn--light" href="#ochrana">Vybrat licenci</a>
+      </div>
+      <img class="tile-eset__box" src="images/eset-nod32.webp" alt="Krabice ESET NOD32 Antivirus" width="437" height="640">
+    </div>
+
+    <div class="tile-stamp">
+      <div class="tile-stamp__copy">
+        <h2>Razítka Trodat</h2>
+        <ul class="ticks">
+          <li>Podle vaší předlohy</li>
+          <li>Samobarvicí řada <strong>Printy</strong></li>
+          <li>Hotové do <strong>7 dní</strong></li>
+        </ul>
+        <a class="btn btn--solid" href="#razitka">Ceník razítek</a>
+      </div>
+      <div class="tile-stamp__art">
+        <p class="pbadge"><span>od</span>410&nbsp;Kč</p>
+        <img src="images/razitko-printy.png" alt="Samobarvicí razítko Trodat Printy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ AKTUÁLNÍ NABÍDKA ═══════════════════════════════════════════ -->
+  <section class="sec stock" id="produkty">
+    <div class="wrap">
+      <div class="stock__head">
+        <h2>Aktuální nabídka</h2>
+        <p>Notebooky, tiskárny a příslušenství z prodejny v Řeporyjích. Ceny včetně DPH.</p>
+      </div>
+      <div class="products">
+        <article class="tile">
+          <div class="tile__pic"><img src="images/acer-swift-edge.png" alt="Acer Swift Edge 14 AI" loading="lazy"></div>
+          <h3>Acer Swift Edge 14 AI</h3>
+          <p class="tile__spec">Core Ultra 7 · 16 GB · 512 GB SSD · OLED</p>
+          <p class="tile__price">37 490 Kč</p>
+        </article>
+        <article class="tile">
+          <div class="tile__pic"><img src="images/acer-aspire5.jpg" alt="Acer Aspire 5 A515-48M" loading="lazy"></div>
+          <h3>Acer Aspire 5</h3>
+          <p class="tile__spec">R7-7530U · 8 GB · 512 GB NVMe</p>
+          <p class="tile__price">15 990 Kč</p>
+        </article>
+        <article class="tile">
+          <div class="tile__pic"><img src="images/acer-extensa.jpg" alt="Acer Extensa EX215-56" loading="lazy"></div>
+          <h3>Acer Extensa EX215-56</h3>
+          <p class="tile__spec">i3-100U · 8 GB · 512 GB SSD</p>
+          <p class="tile__price">13 990 Kč</p>
+        </article>
+        <article class="tile">
+          <div class="tile__pic"><img src="images/acer-aspire-lite.jpg" alt="Acer Aspire Lite AL15-33P" loading="lazy"></div>
+          <h3>Acer Aspire Lite</h3>
+          <p class="tile__spec">Core 3 N355 · 8 GB · 512 GB SSD</p>
+          <p class="tile__price">9 990 Kč</p>
+        </article>
+        <article class="tile">
+          <div class="tile__pic"><img src="images/brother-t730dw.jpg" alt="Brother DCP-T730DW" loading="lazy"></div>
+          <h3>Brother DCP-T730DW</h3>
+          <p class="tile__spec">Inkoust A4 · Wi-Fi · duplex · ADF</p>
+          <p class="tile__price">5 839 Kč</p>
+        </article>
+        <article class="tile">
+          <div class="tile__pic"><img src="images/brother-t530w.jpg" alt="Brother DCP-T530W" loading="lazy"></div>
+          <h3>Brother DCP-T530W</h3>
+          <p class="tile__spec">Inkoust A4 · Wi-Fi · plnitelné zásobníky</p>
+          <p class="tile__price">4 849 Kč</p>
+        </article>
+        <article class="tile">
+          <div class="tile__pic"><img src="images/brother-l1630w.jpg" alt="Brother DCP-L1630W" loading="lazy"></div>
+          <h3>Brother DCP-L1630W</h3>
+          <p class="tile__spec">Laser A4 černobílý · Wi-Fi</p>
+          <p class="tile__price">3 889 Kč</p>
+        </article>
+        <article class="tile">
+          <div class="tile__pic"><img src="images/acer-ekinekt.jpg" alt="Acer eKinekt BD3" loading="lazy"></div>
+          <h3>Acer eKinekt BD3 <span class="tile__flag">−40 %</span></h3>
+          <p class="tile__spec">Pracovní stůl s rotopedem · poslední kus</p>
+          <p class="tile__price">17 940 Kč</p>
+        </article>
+      
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLUŽBY A CENÍK ════════════════════════════════════════════ -->
+  <section class="sec sec--panel cenik" id="cenik">
+    <div class="wrap">
+      <div class="cenik__top">
+        <h2>Služby a ceník</h2>
+        <p>Opravujeme, co prodáváme, i co jste koupili jinde. Diagnostiku a cenovou nabídku
+          uděláme zdarma a víc, než jsme řekli, si neúčtujeme.</p>
+      </div>
+
+      <div class="ptiles">
+        <article class="ptile">
+          <div class="ptile__body">
+            <h3>Servis a opravy</h3>
+            <p class="ptile__desc">Hardware i software, na pultě i u vás doma.</p>
+            <ul class="lines">
+              <li><span>Koupeno u nás</span><i></i><b>800&nbsp;Kč/hod</b></li>
+              <li><span>Koupeno jinde</span><i></i><b>950&nbsp;Kč/hod</b></li>
+              <li><span>Expres do 2 hodin</span><i></i><b>+20&nbsp;%</b></li>
+              <li><span>Expres ihned</span><i></i><b>+50&nbsp;%</b></li>
+              <li><span>Diagnostika</span><i></i><b class="free">zdarma</b></li>
+            </ul>
+          </div>
+          <a class="ptile__tag" href="#kontakt" aria-label="Objednat servis, od 800 Kč za hodinu">
+            <span class="ptile__price"><small class="u-pre">od</small>800&nbsp;Kč<small class="u-post">/hod</small></span>
+            <span class="ptile__go">Objednat <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4.5L15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </article>
+
+        <article class="ptile">
+          <div class="ptile__body">
+            <h3>Instalace Windows</h3>
+            <p class="ptile__desc">Paušál podle rozsahu, ne podle hodin.</p>
+            <ul class="lines">
+              <li><span>Základní instalace</span><i></i><b>800&nbsp;Kč</b></li>
+              <li><span>Rozšířená instalace</span><i></i><b>1&nbsp;200&nbsp;Kč</b></li>
+              <li><span>Plná instalace</span><i></i><b>1&nbsp;600&nbsp;Kč</b></li>
+              <li><span>Upgrade systému</span><i></i><b>800&nbsp;Kč</b></li>
+            </ul>
+          </div>
+          <a class="ptile__tag" href="#kontakt" aria-label="Objednat instalaci Windows, od 800 Kč">
+            <span class="ptile__price"><small class="u-pre">od</small>800&nbsp;Kč</span>
+            <span class="ptile__go">Objednat <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4.5L15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </article>
+
+        <article class="ptile">
+          <div class="ptile__body">
+            <h3>U vás i na dálku</h3>
+            <p class="ptile__desc">Přijedeme k vám, nebo se připojíme přes internet.</p>
+            <ul class="lines">
+              <li><span>Výjezd po Praze</span><i></i><b>25&nbsp;Kč/km</b></li>
+              <li><span>Výjezd mimo Prahu</span><i></i><b>20&nbsp;Kč/km</b></li>
+              <li><span>Spojení na dálku</span><i></i><b>120&nbsp;Kč</b></li>
+              <li><span>Minuta na dálku</span><i></i><b>15&nbsp;Kč</b></li>
+              <li><span>Úvodní analýza</span><i></i><b class="free">zdarma</b></li>
+            </ul>
+          </div>
+          <a class="ptile__tag" href="#dalka" aria-label="Pomoc na dálku, jak to funguje, 120 Kč za spojení">
+            <span class="ptile__price">120&nbsp;Kč<small class="u-post">za spojení</small></span>
+            <span class="ptile__go">Jak na to <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4.5L15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </article>
+
+        <article class="ptile">
+          <div class="ptile__body">
+            <h3>Prodej a ostatní</h3>
+            <p class="ptile__desc">To, co se nedá spočítat hodinou.</p>
+            <ul class="lines">
+              <li><span>Počítač na míru</span><i></i><b class="qual">dle sestavy</b></li>
+              <li><span>Tonery a inkousty</span><i></i><b class="qual">dle modelu</b></li>
+              <li><span>Razítko Trodat</span><i></i><b>od&nbsp;410&nbsp;Kč</b></li>
+              <li><span>Nabídka na sestavu</span><i></i><b class="free">zdarma</b></li>
+            </ul>
+          </div>
+          <a class="ptile__tag" href="#kontakt" aria-label="Poptat počítač na míru, nabídka zdarma">
+            <span class="ptile__price"><small class="u-pre">nabídka</small>zdarma</span>
+            <span class="ptile__go">Poptat <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4.5L15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </article>
+      </div>
+
+      <p class="sheet__foot">Ceny jsou uvedeny včetně DPH 21 %. Základní instalace Windows obsahuje systém
+        a ovladače, rozšířená navíc aktualizace, plná i software. U paušálních instalací odpovídá
+        800 Kč částce 661 Kč bez DPH, 1 200 Kč částce 992 Kč a 1 600 Kč částce 1 322 Kč.
+        Kompletní ceník razítek najdete <a href="#razitka">níže</a>.</p>
+    </div>
+  </section>
+
+  <!-- ══ VZDÁLENÁ POMOC ════════════════════════════════════════════ -->
+  <section class="sec" id="dalka">
+    <div class="wrap">
+      <div class="sec__head sec__head--stack">
+        <h2>Pomoc na dálku</h2>
+        <p>Máte pomalý, zavirovaný či jinak softwarově poškozený počítač? Nemusíte ho nikam
+          vozit. Připojíme se k vám po zabezpečeném internetovém spojení.</p>
+      </div>
+
+      <div class="remote">
+        <ol class="remote__steps">
+          <li><span>1</span><p>Stáhnete si naši aplikaci <strong>TeamViewer</strong> pro dálkové připojení a spustíte ji.</p></li>
+          <li><span>2</span><p>Po spuštění se zobrazí <strong>ID číslo</strong>, které nám sdělíte telefonem.</p></li>
+          <li><span>3</span><p>Připojí se k vám náš technik, provede <strong>zdarma základní analýzu</strong> a sdělí předběžnou cenu.</p></li>
+          <li><span>4</span><p>Když cenu odsouhlasíte, začne s opravou. Celou dobu vidíte na své obrazovce, co dělá, a můžete se kdykoli odpojit.</p></li>
+          <li><span>5</span><p>Po skončení se technik odpojí a vy můžete normálně pracovat.</p></li>
+          <li><span>6</span><p>Obdržíte zálohovou fakturu, uhradíte převodem a po připsání platby vám pošleme řádný daňový doklad.</p></li>
+        </ol>
+
+        <aside class="remote__box">
+          <p class="remote__kicker">Kolik zaplatíte</p>
+          <p class="remote__big">120 Kč <span>za spojení</span></p>
+          <p class="remote__big">15 Kč <span>za každou započatou minutu</span></p>
+          <p class="remote__note">Předběžnou analýzu provedeme <strong>zdarma</strong> a určíme maximální cenu.
+            Garantujeme, že výsledná částka nabídnutou cenu nepřesáhne. Může být klidně i nižší.</p>
+          <a class="btn btn--solid" href="http://get.teamviewer.com/maxcomputerq" rel="noopener" target="_blank">Stáhnout TeamViewer</a>
+          <a class="btn btn--ghost" href="tel:+420770130605">Zavolat 770 130 605</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ OCHRANA POČÍTAČŮ ══════════════════════════════════════════ -->
+  <section class="sec sec--panel" id="ochrana">
+    <div class="wrap prot">
+      <div class="prot__main">
+        <p class="kick kick--ink"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="8" r="5.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6.6 12.4 5 19l5-2.4L15 19l-1.6-6.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg> Zlatý partner ESET od 2004 · 4× Top Partner</p>
+        <h2>Ochrana počítačů</h2>
+        <p class="prot__lead">Licenci ESET u nás koupíte, nainstalujeme ji a nastavíme. A když se něco stane,
+          voláte nám, ne na linku do zahraničí.</p>
+        <ul class="lines">
+          <li><span>ESET NOD32 Antivirus <em>1 PC na 1 rok</em></span><i></i><b>1 209 Kč</b></li>
+          <li><span>Ochrana pro celou rodinu <em>3 zařízení na 1 rok</em></span><i></i><b>1 590 Kč</b></li>
+          <li><span>Prémiová internetová ochrana <em>1 PC na 1 rok</em></span><i></i><b>1 890 Kč</b></li>
+          <li><span>Studentská licence s kartou ISIC <em>1 PC na 1 rok</em></span><i></i><b class="free">518 Kč</b></li>
+        </ul>
+        <p class="prot__note">Studentskou slevu 30 % uplatníte, když pošlete kopii platné karty ISIC na info@maxcomputer.cz.</p>
+        <div class="prot__btns">
+          <a class="btn btn--solid" href="https://renew.eset.cz/893" rel="noopener" target="_blank">Prodloužit licenci</a>
+          <a class="btn btn--outline" href="#kontakt">Poradíme s výběrem</a>
+        </div>
+      </div>
+
+      <div class="prot__side">
+        <figure class="award__pic">
+          <img src="images/eset-diplom.jpg" alt="Diplom ESET, Index věrnosti pro Jana Vávru" loading="lazy" width="1200" height="748">
+        </figure>
+        <h3>Čtyřikrát ESET Top Partner</h3>
+        <p>Firmu jsme založili v roce 1993 a stavěli hlavně počítače. Když se na přelomu tisíciletí
+          rozšířil internet a s ním viry, začali jsme se věnovat zabezpečení. V roce 2004 jsme se
+          spojili s firmou ESET a od samého počátku jsme jejím zlatým partnerem.</p>
+        <p>Ocenění <strong>ESET Top Partner</strong> jsme získali už počtvrté a znovu obhájili kategorii
+          <strong>nejvyšší věrnost zákazníků</strong>.</p>
+        <p class="award__cap">Diplom ESET · Index věrnosti · Jan Vávra · udělen 21. září 2014</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ RAZÍTKA ═══════════════════════════════════════════════════ -->
+  <section class="sec" id="razitka">
+    <div class="wrap">
+      <div class="sec__head sec__head--solo">
+        <h2>Razítka TRODAT</h2>
+      </div>
+
+      <div class="stamp">
+        <div class="stamp__tablewrap">
+          <table class="rtab">
+            <caption class="sr-only">Ceník razítek Trodat Printy</caption>
+            <thead>
+              <tr><th scope="col">Typ strojku</th><th scope="col">Strojek</th><th scope="col">Guma</th><th scope="col">Komplet</th><th scope="col">Polštářek</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Printy 4910</th><td>220</td><td>190</td><td>410</td><td>97</td></tr>
+              <tr><th scope="row">Printy 4911</th><td>262</td><td>233</td><td>495</td><td>97</td></tr>
+              <tr><th scope="row">Printy 4912</th><td>330</td><td>281</td><td>611</td><td>110</td></tr>
+              <tr><th scope="row">Printy 4913</th><td>346</td><td>363</td><td>709</td><td>128</td></tr>
+              <tr><th scope="row">Printy 4915</th><td>477</td><td>394</td><td>871</td><td>166</td></tr>
+              <tr><th scope="row">Printy 4921</th><td>282</td><td>130</td><td>412</td><td>104</td></tr>
+              <tr><th scope="row">Printy 4922</th><td>384</td><td>211</td><td>595</td><td>110</td></tr>
+              <tr><th scope="row">Printy 4923</th><td>417</td><td>286</td><td>703</td><td>122</td></tr>
+              <tr><th scope="row">Printy 4924</th><td>634</td><td>384</td><td>1 018</td><td>166</td></tr>
+            </tbody>
+          </table>
+          <p class="stamp__note">Ceny v Kč včetně DPH 21 %. Standardní dodací lhůta 7 dní.</p>
+        </div>
+        <figure class="stamp__pic">
+          <img src="images/razitko-trodat.jpg" alt="Samobarvicí razítko Trodat Printy" loading="lazy" width="181" height="300">
+          <figcaption>Samobarvicí Printy vyrobíme podle vaší předlohy. Dodáváme
+            i samostatné gumy a náhradní polštářky. Dodací lhůta 7 dní.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ KONTAKT ═══════════════════════════════════════════════════ -->
+  <section class="sec kontakt" id="kontakt">
+    <div class="wrap">
+      <div class="sec__head sec__head--stack">
+        <h2>Přijďte na prodejnu</h2>
+        <p>Jsme na Řeporyjském náměstí od roku 1993. Zastavte se s notebookem pod paží,
+          nebo nejdřív zavolejte, často se to dá vyřešit po telefonu.</p>
+      </div>
+
+      <div class="kx">
+        <div class="kx__col">
+          <h3 class="kx__h">Prodejna a sídlo</h3>
+          <address class="kx__addr">
+            <strong>MAX COMPUTER</strong><br>
+            Řeporyjské nám. 9<br>
+            155 00 Praha 5 – Řeporyje
+          </address>
+          <dl class="kx__dl">
+            <div><dt>Prodejna</dt><dd><a href="tel:+420770130605">+420 770 130 605</a></dd></div>
+            <div><dt>E-mail</dt><dd><a href="mailto:info@maxcomputer.cz">info@maxcomputer.cz</a></dd></div>
+            <div><dt>IČO</dt><dd>48093513</dd></div>
+            <div><dt>DIČ</dt><dd>CZ7505300066</dd></div>
+            <div><dt>Bankovní spojení</dt><dd>2606987021 / 3030 <span>(AirBank)</span></dd></div>
+          </dl>
+
+          <h3 class="kx__h">Otevírací doba</h3>
+          <dl class="kx__dl kx__dl--hours">
+            <div><dt>Pondělí – pátek</dt><dd>8:00 – 12:30 &nbsp;a&nbsp; 13:00 – 17:00</dd></div>
+            <div><dt>Sobota – neděle</dt><dd>zavřeno</dd></div>
+          </dl>
+          <p class="kx__status"><i class="status__dot"></i><span id="status2">Otevírací doba</span></p>
+
+          <figure class="kx__shop">
+            <img src="images/prodejna.jpg" alt="Interiér prodejny MAX COMPUTER" loading="lazy" width="640" height="480">
+            <figcaption>Prodejna na Řeporyjském náměstí.</figcaption>
+          </figure>
+        </div>
+
+        <div class="kx__col">
+          <h3 class="kx__h">Na koho se obrátit</h3>
+          <ul class="people">
+            <li>
+              <p class="people__name">Jan Vávra</p>
+              <p class="people__role">vedení firmy · VIP klientela · nákup zboží · servis · marketing</p>
+              <p class="people__c"><a href="tel:+420603529988">+420 603 529 988</a> &nbsp;·&nbsp;
+                 <a href="mailto:vavra@maxcomputer.cz">vavra@maxcomputer.cz</a></p>
+            </li>
+            <li>
+              <p class="people__name">Roman Schmidt</p>
+              <p class="people__role">maloobchodní prodej · servis · technická podpora</p>
+              <p class="people__c"><a href="tel:+420603560077">+420 603 560 077</a> &nbsp;·&nbsp;
+                 <a href="mailto:schmidt@maxcomputer.cz">schmidt@maxcomputer.cz</a></p>
+            </li>
+          </ul>
+
+          <h3 class="kx__h">Napište nám</h3>
+          <form class="form" id="form" novalidate>
+            <div class="form__row">
+              <label class="field"><span>Jméno</span><input type="text" name="jmeno" autocomplete="name" required></label>
+              <label class="field"><span>Telefon</span><input type="tel" name="telefon" autocomplete="tel"></label>
+            </div>
+            <label class="field"><span>E-mail</span><input type="email" name="email" autocomplete="email" required></label>
+            <label class="field"><span>S čím potřebujete pomoci?</span>
+              <select name="tema">
+                <option>Servis nebo oprava</option>
+                <option>Nákup počítače či tiskárny</option>
+                <option>Pomoc na dálku</option>
+                <option>Antivirus / licence ESET</option>
+                <option>Razítka TRODAT</option>
+                <option>Něco jiného</option>
+              </select>
+            </label>
+            <label class="field"><span>Zpráva</span><textarea name="zprava" rows="4" required></textarea></label>
+            <button class="btn btn--solid" type="submit">Odeslat poptávku</button>
+            <p class="form__msg" id="formMsg" role="status"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="mapwrap">
+      <iframe title="Mapa: MAX COMPUTER, Řeporyjské náměstí 9, Praha 5" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.cz/maps?q=maxcomputer&hl=cs&t=m&ie=UTF8&ll=50.03239,14.312782&spn=0.009373,0.034246&z=15&iwloc=A&output=embed"></iframe>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <img class="foot__logo" src="images/logo-max-light.png" alt="MAX COMPUTER">
+        <p class="foot__claim">Komplexní prodejní a servisní služby<br>v oblasti výpočetní techniky.</p>
+      </div>
+      <nav class="foot__nav" aria-label="Patička">
+        <a href="#cenik">Služby a ceník</a>
+        <a href="#dalka">Pomoc na dálku</a>
+        <a href="#ochrana">Ochrana ESET</a>
+        <a href="#produkty">Prodejna</a>
+        <a href="#razitka">Razítka</a>
+      </nav>
+      <div class="foot__c">
+        <a class="foot__tel" href="tel:+420770130605">+420 770 130 605</a>
+        <a href="mailto:info@maxcomputer.cz">info@maxcomputer.cz</a>
+        <p>Řeporyjské nám. 9<br>155 00 Praha 5 – Řeporyje</p>
+      </div>
+    </div>
+    <p class="foot__rights">Design &amp; kód © 2026 Aetheron · Ukázka návrhu pro MAX COMPUTER ·
+      Jakékoli kopírování nebo použití bez souhlasu autora je zakázáno.</p>
+  </div>
+</footer>
+
+<div class="callbar">
+  <a href="tel:+420770130605">Zavolat</a>
+  <a href="#kontakt">Kudy k nám</a>
+</div>
+
+<div class="wm" aria-hidden="true">Ukázka návrhu · Aetheron</div>
+
+<script src="app.js"></script>
+</body>
+</html>
