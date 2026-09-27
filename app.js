@@ -80,32 +80,62 @@
     var cur = 0, timer = null, touched = false;
     var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    function show(n) {
-      cur = (n + slides.length) % slides.length;
+    function show(n, dir) {
+      var next = (n + slides.length) % slides.length;
+      var prev = cur;
+      // Skip slides hidden via admin (hero_main.enabled / hero_slides_2_5). Guard: never loop forever.
+      var step = dir === -1 ? -1 : 1, guard = 0;
+      while (slides[next].hidden && guard < slides.length) {
+        next = (next + step + slides.length) % slides.length;
+        guard++;
+      }
+      var d = dir;
+      if (d === undefined) {
+        if (next === prev) d = 0;
+        else if (prev === slides.length - 1 && next === 0) d = 1;
+        else if (prev === 0 && next === slides.length - 1) d = -1;
+        else d = next > prev ? 1 : -1;
+      }
+      cur = next;
       for (var k = 0; k < slides.length; k++) {
         var on = k === cur;
         slides[k].classList.toggle('is-active', on);
+        slides[k].classList.remove('is-enter-next', 'is-enter-prev', 'is-exit-next', 'is-exit-prev');
         slides[k].setAttribute('aria-hidden', on ? 'false' : 'true');
-        var focusables = slides[k].querySelectorAll('a, button');
+        var focusables = slides[k].querySelectorAll('a, button, iframe');
         for (var q = 0; q < focusables.length; q++) focusables[q].tabIndex = on ? 0 : -1;
         if (dots[k]) {
           dots[k].classList.toggle('is-active', on);
           if (on) dots[k].setAttribute('aria-current', 'true'); else dots[k].removeAttribute('aria-current');
         }
       }
+      if (prev !== cur && d !== 0 && !still) {
+        var incoming = slides[cur], outgoing = slides[prev];
+        void incoming.offsetWidth;
+        incoming.classList.add(d > 0 ? 'is-enter-next' : 'is-enter-prev');
+        outgoing.classList.add(d > 0 ? 'is-exit-next' : 'is-exit-prev');
+        if (animT) clearTimeout(animT);
+        animT = setTimeout(function () {
+          for (var j = 0; j < slides.length; j++) {
+            slides[j].classList.remove('is-enter-next', 'is-enter-prev', 'is-exit-next', 'is-exit-prev');
+          }
+          animT = null;
+        }, 700);
+      }
     }
+    var animT = null;
     function stop() { if (timer) { clearInterval(timer); timer = null; } }
-    function start() { if (still || touched) return; stop(); timer = setInterval(function () { show(cur + 1); }, 6500); }
-    function manual(n) { touched = true; stop(); show(n); }
+    function start() { if (still || touched) return; stop(); timer = setInterval(function () { show(cur + 1, 1); }, 6500); }
+    function manual(n, d) { touched = true; stop(); show(n, d); }
 
-    box.querySelector('.slides__arrow--prev').addEventListener('click', function () { manual(cur - 1); });
-    box.querySelector('.slides__arrow--next').addEventListener('click', function () { manual(cur + 1); });
+    box.querySelector('.slides__arrow--prev').addEventListener('click', function () { manual(cur - 1, -1); });
+    box.querySelector('.slides__arrow--next').addEventListener('click', function () { manual(cur + 1, 1); });
     Array.prototype.forEach.call(dots, function (dot, k) {
-      dot.addEventListener('click', function () { manual(k); });
+      dot.addEventListener('click', function () { manual(k, k === cur ? 0 : (k > cur ? 1 : -1)); });
     });
     box.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowLeft') manual(cur - 1);
-      else if (e.key === 'ArrowRight') manual(cur + 1);
+      if (e.key === 'ArrowLeft') manual(cur - 1, -1);
+      else if (e.key === 'ArrowRight') manual(cur + 1, 1);
     });
 
     var x0 = null;
@@ -113,7 +143,7 @@
     box.addEventListener('touchend', function (e) {
       if (x0 === null) return;
       var dx = e.changedTouches[0].clientX - x0;
-      if (Math.abs(dx) > 40) manual(cur + (dx < 0 ? 1 : -1));
+      if (Math.abs(dx) > 40) manual(cur + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
       x0 = null;
     }, { passive: true });
 
@@ -124,6 +154,24 @@
 
     show(0);
     start();
+  }
+
+  /* ── mobilní ceník: tečky ukazují, na které dlaždici jste ─────────── */
+  var pt = document.querySelector('.ptiles');
+  var ptDots = document.querySelectorAll('.ptiles__dots span');
+  if (pt && ptDots.length) {
+    var ptTick = function () {
+      var first = pt.querySelector('.ptile');
+      if (!first) return;
+      var gap = parseFloat(getComputedStyle(pt).columnGap) || 0;
+      var step = first.getBoundingClientRect().width + gap;
+      var idx = Math.round(pt.scrollLeft / step);
+      if (pt.scrollLeft >= pt.scrollWidth - pt.clientWidth - 2) idx = ptDots.length - 1;
+      for (var k = 0; k < ptDots.length; k++) ptDots[k].classList.toggle('is-active', k === idx);
+    };
+    pt.addEventListener('scroll', ptTick, { passive: true });
+    window.addEventListener('resize', ptTick);
+    ptTick();
   }
 
   /* ── formulář (v ukázce neodesílá) ───────────────────────────────── */
@@ -156,4 +204,22 @@
     if (mod && (k === 's' || k === 'u')) return block(e);
     if (mod && e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) return block(e);
   }, true);
+  // Vložení do rámu na cizí doméně přesměruje návštěvníka na originál.
+  // Lokální náhled (file://) a stejná doména zůstávají beze změny.
+  if (window.top !== window.self && location.protocol !== 'file:') {
+    var foreign = true;
+    try { foreign = window.top.location.hostname !== location.hostname; } catch (err) { foreign = true; }
+    if (foreign) {
+      try { window.top.location.replace(location.href); }
+      catch (err) { document.documentElement.style.visibility = 'hidden'; }
+    }
+  }
+
+  // Delší zkopírovaný text dostane podpis autora. Telefon, e-mail nebo adresa se kopírují normálně.
+  document.addEventListener('copy', function (e) {
+    var sel = String(window.getSelection() || '');
+    if (sel.length < 120 || !e.clipboardData) return;
+    e.clipboardData.setData('text/plain', sel + '\n\nUkázka návrhu webu pro MAX COMPUTER · © 2026 Aetheron · kopírování bez souhlasu autora je zakázáno.');
+    e.preventDefault();
+  });
 })();

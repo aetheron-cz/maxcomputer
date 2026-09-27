@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  MAX COMPUTER  ·  e-shop
+  Design & kód © 2026 Aetheron. Všechna práva vyhrazena / All rights reserved.
+  Katalog se načítá z /api/catalog; bez API se zobrazí záložní nabídka.
+  ============================================================================
+-->
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>E-shop · MAX COMPUTER Praha 5 Řeporyje</title>
+<meta name="description" content="Aktuální nabídka prodejny MAX COMPUTER — notebooky, tiskárny, příslušenství. Ceny vč. DPH.">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+<meta name="author" content="Aetheron">
+<meta name="copyright" content="© 2026 Aetheron — všechna práva vyhrazena">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.shop{padding:calc(var(--nav-h) + 24px) 0 40px}.shop__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:clamp(14px,1.6vw,24px);margin-top:20px}
+.card{position:relative;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;display:flex;flex-direction:column;transition:transform .5s var(--ease)}
+.card:hover{transform:translateY(-3px)}
+.card img{width:100%;height:220px;object-fit:cover;background:var(--panel)}
+.card__b{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card__t{font-family:var(--disp);color:var(--ink);font-size:21px;line-height:1.2;margin:0}
+.card__t a{color:inherit;text-decoration:none}
+.card__t a::after{content:"";position:absolute;inset:0}
+.card__t a:focus-visible{outline-offset:-2px}
+.specs{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0}
+.specs span{font-size:12.5px;font-weight:500;color:var(--ink-2);background:var(--panel);border-radius:5px;padding:3px 9px}
+.card__p{font-family:var(--disp);font-weight:700;font-size:22px;color:var(--ink);margin:auto 0 0;padding-top:8px}
+.card__a{font-size:13px;color:var(--ink-3);margin:0}
+.shop__bar{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.shop__bar input,.shop__bar select{padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit}
+#meta{margin-top:14px;font-size:14px;color:var(--ink-3)}
+#shop-notice:empty{display:none}
+#shop-notice{margin-top:12px;padding:12px 16px;background:var(--orange-t);border-radius:10px;font-size:14.5px;color:var(--ink-2)}
+</style>
+</head>
+<body id="top">
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+<header class="nav is-solid" id="nav"><div class="nav__in">
+<a class="brand" href="index.html#top" aria-label="MAX COMPUTER, úvod"><img class="brand__logo" src="images/logo-max.png" alt="MAX COMPUTER"></a>
+<nav class="nav__links" aria-label="Hlavní navigace"><a href="pricing.html">Služby a ceník</a><a href="ochrana.html">Ochrana</a><a href="eshop.html" aria-current="page">E-shop</a><a href="razitka.html">Razítka</a><a href="index.html#kontakt">Kontakt</a></nav>
+<div class="nav__right">
+<span class="status" id="status" aria-live="polite"><i class="status__dot"></i><b class="status__state">Otevírací doba</b><span class="status__more"></span></span>
+<a class="tel" href="tel:+420770130605"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6.2 2.8 4.1 3.3c-.7.2-1.2.8-1.1 1.6.6 6.3 5.8 11.5 12.1 12.1.8.1 1.4-.4 1.6-1.1l.5-2.1c.2-.7-.2-1.4-.9-1.7l-2.4-1c-.6-.2-1.2 0-1.6.4l-.9 1.1c-2-1-3.6-2.6-4.6-4.6l1.1-.9c.5-.4.7-1 .4-1.6l-1-2.4c-.3-.7-1-1.1-1.7-.9Z" fill="currentColor"/></svg><span>770&nbsp;130&nbsp;605</span></a>
+<button class="burger" id="burger" aria-label="Otevřít menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span></button>
+</div>
+</div></header>
+<div class="drawer" id="drawer" hidden>
+<nav class="drawer__nav" aria-label="Mobilní navigace">
+<a href="pricing.html">Služby a ceník</a>
+<a href="index.html#dalka">Pomoc na dálku</a>
+<a href="ochrana.html">Ochrana ESET</a>
+<a href="eshop.html" aria-current="page">E-shop</a>
+<a href="razitka.html">Razítka</a>
+<a href="index.html#kontakt">Kontakt</a>
+</nav>
+<div class="drawer__foot">
+<a href="tel:+420770130605">+420 770 130 605</a>
+<a href="mailto:info@maxcomputer.cz">info@maxcomputer.cz</a>
+<p>Řeporyjské náměstí 9, 155 00 Praha 5</p>
+</div>
+</div>
+<main id="obsah" class="shop"><div class="wrap">
+<h1 id="shop-title">E-shop — aktuální nabídka</h1>
+<p id="shop-perex">Výběr z prodejny v Řeporyjích. Ceny vč. DPH.</p>
+<p id="shop-notice"></p>
+<div class="shop__bar">
+<input id="q" type="search" placeholder="Hledat…" aria-label="Hledat">
+<select id="cat" aria-label="Kategorie"><option value="">Vše</option></select>
+<select id="av" aria-label="Dostupnost"><option value="">Jakákoli dostupnost</option><option value="in_stock">Skladem</option><option value="on_order">Na objednávku</option><option value="out_of_stock">Nedostupné</option></select>
+</div>
+<p id="meta" role="status"></p>
+<div class="shop__grid" id="grid"></div>
+</div></main>
+<footer class="foot">
+<div class="wrap">
+<div class="foot__top">
+<div class="foot__brand">
+<img class="foot__logo" src="images/logo-max-light.png" alt="MAX COMPUTER">
+<p class="foot__claim">Komplexní prodejní a servisní služby<br>v oblasti výpočetní techniky.</p>
+</div>
+<nav class="foot__nav" aria-label="Patička">
+<a href="pricing.html">Služby a ceník</a>
+<a href="ochrana.html">Ochrana ESET</a>
+<a href="eshop.html" aria-current="page">E-shop</a>
+<a href="razitka.html">Razítka</a>
+</nav>
+<div class="foot__c">
+<a class="foot__tel" href="tel:+420770130605">+420 770 130 605</a>
+<a href="mailto:info@maxcomputer.cz">info@maxcomputer.cz</a>
+<p>Řeporyjské nám. 9<br>155 00 Praha 5 – Řeporyje</p>
+</div>
+</div>
+<p class="foot__rights">Design &amp; kód © 2026 Aetheron · Ukázka návrhu pro MAX COMPUTER ·
+Jakékoli kopírování nebo použití bez souhlasu autora je zakázáno.</p>
+</div>
+</footer>
+<div class="callbar">
+<a href="tel:+420770130605"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6.2 2.8 4.1 3.3c-.7.2-1.2.8-1.1 1.6.6 6.3 5.8 11.5 12.1 12.1.8.1 1.4-.4 1.6-1.1l.5-2.1c.2-.7-.2-1.4-.9-1.7l-2.4-1c-.6-.2-1.2 0-1.6.4l-.9 1.1c-2-1-3.6-2.6-4.6-4.6l1.1-.9c.5-.4.7-1 .4-1.6l-1-2.4c-.3-.7-1-1.1-1.7-.9Z" fill="currentColor"/></svg>Zavolat</a>
+<a href="index.html#kontakt"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 18s5.5-5.2 5.5-9.6a5.5 5.5 0 0 0-11 0C4.5 12.8 10 18 10 18Z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="10" cy="8.4" r="2" fill="currentColor"/></svg>Kudy k nám</a>
+</div>
+<script src="app.js"></script>
+<script>
+(function(){
+  var grid=document.getElementById('grid'),meta=document.getElementById('meta');
+  /* Záložní nabídka — když API neodpovídá (file:// náhled, výpadek, prázdná DB). */
+  var FALLBACK=[
+    {id:'acer-swift-edge',title:'Acer Swift Edge 14 AI',price:37490,availability:'in_stock',category:'Notebooky',image:'images/acer-swift-edge.png',url:''},
+    {id:'acer-aspire-5',title:'Acer Aspire 5 A515-48M',price:15990,availability:'in_stock',category:'Notebooky',image:'images/acer-aspire5.jpg',url:''},
+    {id:'acer-extensa',title:'Acer Extensa EX215-56',price:13990,availability:'in_stock',category:'Notebooky',image:'images/acer-extensa.jpg',url:''},
+    {id:'acer-aspire-lite',title:'Acer Aspire Lite AL15-33P',price:9990,availability:'in_stock',category:'Notebooky',image:'images/acer-aspire-lite.jpg',url:''},
+    {id:'brother-t730dw',title:'Brother DCP-T730DW',price:5839,availability:'in_stock',category:'Tiskárny',image:'images/brother-t730dw.jpg',url:''},
+    {id:'brother-t530w',title:'Brother DCP-T530W',price:4849,availability:'in_stock',category:'Tiskárny',image:'images/brother-t530w.jpg',url:''},
+    {id:'brother-l1630w',title:'Brother DCP-L1630W',price:3889,availability:'in_stock',category:'Tiskárny',image:'images/brother-l1630w.jpg',url:''},
+    {id:'acer-ekinekt',title:'Acer eKinekt BD3',price:17940,availability:'on_order',category:'Doprodej',image:'images/acer-ekinekt.jpg',url:''}
+  ];
+  var AV_TXT={in_stock:'Skladem',on_order:'Na objednávku',out_of_stock:'Nedostupné',unknown:''};
+  function text(el,s){el.textContent=s==null?'':String(s);}
+  /* Parametry z názvu: "… R7/16GB/1TB" → jméno + čipy. Nevymýšlíme nic navíc. */
+  function parseSpecs(title){
+    var parts=String(title||'').split(/\s+/).filter(Boolean);
+    var last=parts[parts.length-1]||'';
+    if(last.indexOf('/')>0&&/^[A-Za-z0-9+\-.]+(\/[A-Za-z0-9+\-.]+)+$/.test(last)){
+      return{name:parts.slice(0,-1).join(' '),specs:last.split('/')};
+    }
+    return{name:title,specs:[]};
+  function pocet(n){
+    if(n===1)return '1 položka';
+    if(n>=2&&n<=4)return n+' položky';
+    return n+' položek';
+  }
+  function availTxt(p){return [p.category,AV_TXT[p.availability]||''].filter(Boolean).join(' · ');}
+  function render(items){
+    grid.textContent='';
+    items.forEach(function(p){
+      var ps=parseSpecs(p.title);
+      var a=document.createElement('article');a.className='card';
+      var img=document.createElement('img');img.loading='lazy';img.alt='';img.src=p.image||'images/prodejna.jpg';a.appendChild(img);
+      var b=document.createElement('div');b.className='card__b';
+      var t=document.createElement('h2');t.className='card__t';
+      var link=document.createElement('a');link.href='product.html?id='+encodeURIComponent(p.id||p.title);link.textContent=ps.name;t.appendChild(link);b.appendChild(t);
+      if(ps.specs.length){
+        var chips=document.createElement('p');chips.className='specs';
+        ps.specs.forEach(function(sp){var c=document.createElement('span');c.textContent=sp;chips.appendChild(c);});
+        b.appendChild(chips);
+      }
+      var pr=document.createElement('p');pr.className='card__p';pr.textContent=(p.price||0).toLocaleString('cs-CZ')+' Kč';b.appendChild(pr);
+      var av2=document.createElement('p');av2.className='card__a';av2.textContent=availTxt(p);b.appendChild(av2);
+      a.appendChild(b);grid.appendChild(a);
+    });
+  }
+  function filters(){return{q:document.getElementById('q').value,cat:document.getElementById('cat').value,av:document.getElementById('av').value};}
+  function matchFallback(f){
+    var q=f.q.trim().toLowerCase();
+    return FALLBACK.filter(function(p){
+      if(f.cat&&p.category!==f.cat)return false;
+      if(f.av&&p.availability!==f.av)return false;
+      if(q&&p.title.toLowerCase().indexOf(q)<0)return false;
+      return true;
+    });
+  }
+  function syncCatOptions(fromItems){
+    var sel=document.getElementById('cat'),have={};
+    Array.prototype.forEach.call(sel.options,function(o){have[o.value]=true;});
+    fromItems.forEach(function(p){
+      if(p.category&&!have[p.category]){var o=document.createElement('option');o.value=p.category;o.textContent=p.category;sel.appendChild(o);have[p.category]=true;}
+    });
+  }
+  fetch('/api/content',{credentials:'same-origin'}).then(function(r){return r.ok?r.json():null;}).then(function(d){
+    if(!d||!d.eshop_page)return;
+    text(document.getElementById('shop-title'),d.eshop_page.title||document.getElementById('shop-title').textContent);
+    text(document.getElementById('shop-perex'),d.eshop_page.perex);
+    text(document.getElementById('shop-notice'),d.eshop_page.notice);
+  }).catch(function(){});
+  function loadCats(){
+    fetch('/api/catalog/categories',{credentials:'same-origin'}).then(function(r){return r.json();}).then(function(d){
+      var sel=document.getElementById('cat');
+      (d.categories||[]).forEach(function(c){
+        var o=document.createElement('option');o.value=c;o.textContent=c;sel.appendChild(o);
+      });
+    }).catch(function(){syncCatOptions(FALLBACK);});
+  }
+  function load(){
+    var f=filters();
+    var url='/api/catalog?limit=60&q='+encodeURIComponent(f.q)+'&category='+encodeURIComponent(f.cat)+'&availability='+encodeURIComponent(f.av);
+    meta.textContent='Načítám…';
+    fetch(url,{credentials:'same-origin'}).then(function(r){
+      if(!r.ok)throw new Error('api');
+      return r.json();
+    }).then(function(d){
+      var items=d.items||[];
+      if(!items.length&&!f.q&&!f.cat&&!f.av){
+        items=FALLBACK.slice();
+        meta.textContent=pocet(items.length)+' · zobrazuji záložní nabídku — dostupnost ověřte telefonicky';
+      }else if(!items.length){
+        meta.textContent='Nic jsme nenašli — zkuste upravit hledání, nebo zavolejte 770 130 605.';
+      }else{
+        meta.textContent=pocet(d.total||items.length)+(d.last_sync?' · Aktualizováno '+new Date(d.last_sync).toLocaleString('cs-CZ'):'');
+      }
+      render(items);
+    }).catch(function(){
+      var items=matchFallback(f);
+      render(items);
+      meta.textContent=items.length
+        ? pocet(items.length)+' · zobrazuji záložní nabídku — dostupnost ověřte telefonicky na 770 130 605'
+        : 'Katalog se nepodařilo načíst a záložní nabídka nic nenašla — zavolejte 770 130 605.';
+    });
+  }
+  ['q','cat','av'].forEach(function(id){document.getElementById(id).addEventListener(id==='q'?'input':'change',load);});
+  loadCats();load();
+})();
+</script>
+</body>
+</html>

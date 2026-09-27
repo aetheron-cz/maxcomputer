@@ -12,12 +12,15 @@ in whole or in part, without the prior written consent of the author.
 Ownership transfers only upon a signed agreement and full payment.
 
 Third-party material used in this preview:
-  · Product photography, ESET certificate, shop photo and logo artwork
-    remain the property of MAX COMPUTER and their respective brand owners
-    (Acer, Brother, ESET, Trodat, TeamViewer).
-  · Photographs of repair work sourced from Unsplash under the Unsplash
-    License; they are placeholders and are intended to be replaced with
-    the client's own photography.
+  · The logo, product photography, the ESET certificate, the shop photo and
+    the Trodat stamp photo belong to MAX COMPUTER and the respective brand
+    owners (Acer, Brother, ESET, Trodat, TeamViewer). The logo was extracted
+    from the client's own file for demonstration purposes only.
+  · The photograph of an opened laptop comes from Unsplash under the Unsplash
+    License. It is a placeholder meant to be replaced with the client's own
+    photography.
+  · The typefaces IBM Plex Sans, IBM Plex Sans Condensed and Rubik are used
+    under the SIL Open Font License, served by Google Fonts.
 
 ---
 

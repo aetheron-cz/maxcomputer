@@ -19,3 +19,8 @@ Disallow: /
 
 User-agent: ia_archiver
 Disallow: /
+
+# Admin + API nikdy neindexovat (i po přepnutí public části na index)
+User-agent: *
+Disallow: /admin
+Disallow: /api/

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  MAX COMPUTER  ·  ceník služeb
+  Design & kód © 2026 Aetheron. Všechna práva vyhrazena / All rights reserved.
+  ============================================================================
+-->
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ceník služeb · MAX COMPUTER, Praha 5 Řeporyje</title>
+<meta name="description" content="Ceník servisu počítačů, instalací Windows, výjezdů a pomoci na dálku. MAX COMPUTER, Řeporyjské náměstí 9, Praha 5.">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+<meta name="author" content="Aetheron">
+<meta name="copyright" content="© 2026 Aetheron — všechna práva vyhrazena">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="index.html#top" aria-label="MAX COMPUTER, úvod">
+      <img class="brand__logo" src="images/logo-max.png" alt="MAX COMPUTER">
+    </a>
+
+    <nav class="nav__links" aria-label="Hlavní navigace">
+      <a href="pricing.html" aria-current="page">Služby a ceník</a>
+      <a href="ochrana.html">Ochrana</a>
+      <a href="eshop.html">E-shop</a>
+      <a href="razitka.html">Razítka</a>
+      <a href="index.html#kontakt">Kontakt</a>
+    </nav>
+
+    <div class="nav__right">
+      <span class="status" id="status" aria-live="polite"><i class="status__dot"></i><b class="status__state">Otevírací doba</b><span class="status__more"></span></span>
+      <a class="tel" href="tel:+420770130605"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6.2 2.8 4.1 3.3c-.7.2-1.2.8-1.1 1.6.6 6.3 5.8 11.5 12.1 12.1.8.1 1.4-.4 1.6-1.1l.5-2.1c.2-.7-.2-1.4-.9-1.7l-2.4-1c-.6-.2-1.2 0-1.6.4l-.9 1.1c-2-1-3.6-2.6-4.6-4.6l1.1-.9c.5-.4.7-1 .4-1.6l-1-2.4c-.3-.7-1-1.1-1.7-.9Z" fill="currentColor"/></svg><span>770&nbsp;130&nbsp;605</span></a>
+      <button class="burger" id="burger" aria-label="Otevřít menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <nav class="drawer__nav" aria-label="Mobilní navigace">
+    <a href="pricing.html" aria-current="page">Služby a ceník</a>
+    <a href="index.html#dalka">Pomoc na dálku</a>
+    <a href="ochrana.html">Ochrana ESET</a>
+    <a href="eshop.html">E-shop</a>
+    <a href="razitka.html">Razítka</a>
+    <a href="index.html#kontakt">Kontakt</a>
+  </nav>
+  <div class="drawer__foot">
+    <a href="tel:+420770130605">+420 770 130 605</a>
+    <a href="mailto:info@maxcomputer.cz">info@maxcomputer.cz</a>
+    <p>Řeporyjské náměstí 9, 155 00 Praha 5</p>
+  </div>
+</div>
+
+<main id="obsah">
+
+  <!-- ══ CENÍK SLUŽEB ═══════════════════════════════════════════════ -->
+  <section class="sec sec--panel cenik" id="cenik">
+    <div class="wrap">
+      <div class="cenik__top">
+        <h1>Ceník služeb</h1>
+        <p>Opravujeme, co prodáváme, i co jste koupili jinde. Diagnostiku a cenovou nabídku
+          uděláme zdarma a víc, než jsme řekli, si neúčtujeme.</p>
+      </div>
+
+      <div class="ptiles">
+        <article class="ptile">
+          <div class="ptile__body">
+            <h3>Servis a opravy</h3>
+            <p class="ptile__desc">Hardware i software, na pultě i u vás doma.</p>
+            <ul class="lines">
+              <li><span>Koupeno u nás</span><i></i><b>800&nbsp;Kč/hod</b></li>
+              <li><span>Koupeno jinde</span><i></i><b>950&nbsp;Kč/hod</b></li>
+              <li><span>Expres do 2 hodin</span><i></i><b>+20&nbsp;%</b></li>
+              <li><span>Expres ihned</span><i></i><b>+50&nbsp;%</b></li>
+              <li><span>Diagnostika</span><i></i><b class="free">zdarma</b></li>
+            </ul>
+          </div>
+          <a class="ptile__tag" href="index.html#kontakt" aria-label="Objednat servis, od 800 Kč za hodinu">
+            <span class="ptile__price"><small class="u-pre">od</small>800&nbsp;Kč<small class="u-post">/hod</small></span>
+            <span class="ptile__go">Objednat <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4.5L15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </article>
+
+        <article class="ptile">
+          <div class="ptile__body">
+            <h3>Instalace Windows</h3>
+            <p class="ptile__desc">Paušál podle rozsahu, ne podle hodin.</p>
+            <ul class="lines">
+              <li><span>Základní instalace</span><i></i><b>800&nbsp;Kč</b></li>
+              <li><span>Rozšířená instalace</span><i></i><b>1&nbsp;200&nbsp;Kč</b></li>
+              <li><span>Plná instalace</span><i></i><b>1&nbsp;600&nbsp;Kč</b></li>
+              <li><span>Upgrade systému</span><i></i><b>800&nbsp;Kč</b></li>
+            </ul>
+          </div>
+          <a class="ptile__tag" href="index.html#kontakt" aria-label="Objednat instalaci Windows, od 800 Kč">
+            <span class="ptile__price"><small class="u-pre">od</small>800&nbsp;Kč</span>
+            <span class="ptile__go">Objednat <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4.5L15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </article>
+
+        <article class="ptile">
+          <div class="ptile__body">
+            <h3>U vás i na dálku</h3>
+            <p class="ptile__desc">Přijedeme k vám, nebo se připojíme přes internet.</p>
+            <ul class="lines">
+              <li><span>Výjezd po Praze</span><i></i><b>25&nbsp;Kč/km</b></li>
+              <li><span>Výjezd mimo Prahu</span><i></i><b>20&nbsp;Kč/km</b></li>
+              <li><span>Spojení na dálku</span><i></i><b>120&nbsp;Kč</b></li>
+              <li><span>Minuta na dálku</span><i></i><b>15&nbsp;Kč</b></li>
+              <li><span>Úvodní analýza</span><i></i><b class="free">zdarma</b></li>
+            </ul>
+          </div>
+          <a class="ptile__tag" href="index.html#dalka" aria-label="Pomoc na dálku, jak to funguje, 120 Kč za spojení">
+            <span class="ptile__price">120&nbsp;Kč<small class="u-post">za spojení</small></span>
+            <span class="ptile__go">Jak na to <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4.5L15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </article>
+
+        <article class="ptile">
+          <div class="ptile__body">
+            <h3>Prodej a ostatní</h3>
+            <p class="ptile__desc">To, co se nedá spočítat hodinou.</p>
+            <ul class="lines">
+              <li><span>Počítač na míru</span><i></i><b class="qual">dle sestavy</b></li>
+              <li><span>Tonery a inkousty</span><i></i><b class="qual">dle modelu</b></li>
+              <li><span>Razítko Trodat</span><i></i><b>od&nbsp;410&nbsp;Kč</b></li>
+              <li><span>Nabídka na sestavu</span><i></i><b class="free">zdarma</b></li>
+            </ul>
+          </div>
+          <a class="ptile__tag" href="index.html#kontakt" aria-label="Poptat počítač na míru, nabídka zdarma">
+            <span class="ptile__price"><small class="u-pre">nabídka</small>zdarma</span>
+            <span class="ptile__go">Poptat <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4.5L15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </article>
+      </div>
+
+      <div class="ptiles__dots" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      <p class="sheet__foot">Ceny jsou uvedeny včetně DPH 21 %. Základní instalace Windows obsahuje systém
+        a ovladače, rozšířená navíc aktualizace, plná i software. U paušálních instalací odpovídá
+        800 Kč částce 661 Kč bez DPH, 1 200 Kč částce 992 Kč a 1 600 Kč částce 1 322 Kč.
+        Kompletní ceník razítek najdete na <a href="razitka.html">hlavní stránce</a>.</p>
+
+      <div class="cenik__more">
+        <a class="btn btn--outline" href="ochrana.html">Licence ESET</a>
+        <a class="btn btn--outline" href="razitka.html">Razítka TRODAT</a>
+        <a class="btn btn--solid" href="index.html#kontakt">Objednat servis</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <img class="foot__logo" src="images/logo-max-light.png" alt="MAX COMPUTER">
+        <p class="foot__claim">Komplexní prodejní a servisní služby<br>v oblasti výpočetní techniky.</p>
+      </div>
+      <nav class="foot__nav" aria-label="Patička">
+        <a href="pricing.html" aria-current="page">Služby a ceník</a>
+        <a href="index.html#dalka">Pomoc na dálku</a>
+        <a href="ochrana.html">Ochrana ESET</a>
+        <a href="eshop.html">E-shop</a>
+        <a href="razitka.html">Razítka</a>
+      </nav>
+      <div class="foot__c">
+        <a class="foot__tel" href="tel:+420770130605">+420 770 130 605</a>
+        <a href="mailto:info@maxcomputer.cz">info@maxcomputer.cz</a>
+        <p>Řeporyjské nám. 9<br>155 00 Praha 5 – Řeporyje</p>
+      </div>
+    </div>
+    <p class="foot__rights">Design &amp; kód © 2026 Aetheron · Ukázka návrhu pro MAX COMPUTER ·
+      Jakékoli kopírování nebo použití bez souhlasu autora je zakázáno.</p>
+  </div>
+</footer>
+
+<div class="callbar">
+  <a href="tel:+420770130605"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6.2 2.8 4.1 3.3c-.7.2-1.2.8-1.1 1.6.6 6.3 5.8 11.5 12.1 12.1.8.1 1.4-.4 1.6-1.1l.5-2.1c.2-.7-.2-1.4-.9-1.7l-2.4-1c-.6-.2-1.2 0-1.6.4l-.9 1.1c-2-1-3.6-2.6-4.6-4.6l1.1-.9c.5-.4.7-1 .4-1.6l-1-2.4c-.3-.7-1-1.1-1.7-.9Z" fill="currentColor"/></svg>Zavolat</a>
+  <a href="index.html#kontakt"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 18s5.5-5.2 5.5-9.6a5.5 5.5 0 0 0-11 0C4.5 12.8 10 18 10 18Z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="10" cy="8.4" r="2" fill="currentColor"/></svg>Kudy k nám</a>
+</div>
+
+<script src="app.js"></script>
+<script src="assets/content-loader.js" defer></script>
+</body>
+</html>

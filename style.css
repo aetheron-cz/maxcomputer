@@ -167,6 +167,18 @@ strong{ font-weight:600; color:var(--ink); }
   transition:opacity .6s var(--ease), visibility 0s linear .6s;
 }
 .slide.is-active{ opacity:1; visibility:visible; transition:opacity .6s var(--ease), visibility 0s; }
+/* Směrové zajíždění: příchozí zprava při dalším, zleva při předchozím; odchozí opačně */
+.slide.is-enter-next{ animation:slideInRight .65s var(--ease) both; }
+.slide.is-enter-prev{ animation:slideInLeft .65s var(--ease) both; }
+.slide.is-exit-next{ visibility:visible; animation:slideOutLeft .65s var(--ease) both; }
+.slide.is-exit-prev{ visibility:visible; animation:slideOutRight .65s var(--ease) both; }
+@keyframes slideInRight{ from{ transform:translateX(90px); opacity:0; } to{ transform:translateX(0); opacity:1; } }
+@keyframes slideInLeft{ from{ transform:translateX(-90px); opacity:0; } to{ transform:translateX(0); opacity:1; } }
+@keyframes slideOutLeft{ from{ transform:translateX(0); opacity:1; } to{ transform:translateX(-90px); opacity:0; } }
+@keyframes slideOutRight{ from{ transform:translateX(0); opacity:1; } to{ transform:translateX(90px); opacity:0; } }
+@media (prefers-reduced-motion: reduce){
+  .slide.is-enter-next, .slide.is-enter-prev, .slide.is-exit-next, .slide.is-exit-prev{ animation:none; }
+}
 .slide__copy{ position:relative; z-index:2; max-width:31rem; }
 .slide__tag{
   display:inline-block; margin:0 0 16px; padding:5px 11px; border-radius:5px;
@@ -191,7 +203,7 @@ strong{ font-weight:600; color:var(--ink); }
 .slide--acer .slide__art{ align-self:center; width:100%; height:auto; aspect-ratio:1.18; }
 .slide__img--back{ position:absolute; width:64%; left:0; top:6%; }
 .slide__img--front{ position:absolute; width:84%; right:-3%; top:32%; }
-.slide:not(.is-active) .slide__img{ opacity:0; transform:translateX(28px); }
+.slide:not(.is-active):not(.is-exit-next):not(.is-exit-prev) .slide__img{ opacity:0; transform:translateX(28px); }
 .slide__badge{
   position:absolute; z-index:3; top:10%; right:4%;
   display:grid; place-items:center; width:clamp(76px,6.6vw,100px); aspect-ratio:1; border-radius:50%;
@@ -206,7 +218,7 @@ strong{ font-weight:600; color:var(--ink); }
   object-fit:cover; object-position:50% 62%;
   transition:transform 1.4s var(--ease);
 }
-.slide--photo:not(.is-active) .slide__bg{ transform:scale(1.05); }
+.slide--photo:not(.is-active):not(.is-exit-next):not(.is-exit-prev) .slide__bg{ transform:scale(1.05); }
 .slide--photo::after{
   content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
   background:linear-gradient(90deg, rgba(10,12,16,.88) 0%, rgba(10,12,16,.64) 44%, rgba(10,12,16,.08) 82%);
@@ -214,6 +226,53 @@ strong{ font-weight:600; color:var(--ink); }
 .slide--photo .slide__h{ color:#fff; }
 .slide--photo .slide__sub{ color:rgba(255,255,255,.84); }
 .slide--photo .slide__tag{ background:#fff; color:var(--ink); }
+
+/* Nový úvodní snímek: nahoře foto + mapa full-bleed, dole textový pás */
+.slide--store{
+  grid-template-columns:minmax(0,1fr);
+  grid-template-rows:minmax(0,1.05fr) minmax(0,.95fr);
+  align-items:stretch; gap:0;
+  padding:0;
+}
+.store__top{
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:0; padding:0; margin:0;
+  min-height:0; height:100%;
+}
+.store__pic{ margin:0; height:100%; min-height:0; background:var(--panel-2); }
+.store__pic img{
+  width:100%; height:100%; object-fit:cover;
+  border-radius:0; aspect-ratio:auto; display:block;
+}
+.store__map{ margin:0; height:100%; min-height:0; background:var(--panel-2); }
+.store__map iframe{
+  width:100%; height:100%; min-height:100%; border:0; display:block;
+  filter:grayscale(1) contrast(1.04);
+}
+.store__bottom{
+  margin:0; background:var(--graphite); color:#fff;
+  padding:clamp(18px,2.4vw,30px) var(--copy-x) calc(clamp(16px,2vw,24px) + 30px);
+  display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+  min-height:0;
+}
+.store__headline{
+  margin:0 0 8px;
+  font-family:var(--disp); font-weight:700; letter-spacing:-.012em;
+  font-size:clamp(26px,3vw,44px); line-height:1.02; color:#fff;
+}
+.store__headline span{ color:var(--orange); }
+.store__addr{
+  font-family:var(--body); font-size:clamp(13.5px,1.2vw,16px); line-height:1.55;
+  color:#d7dbe0; margin:0;
+}
+.store__link{
+  font-family:var(--body); font-size:inherit; font-weight:500;
+  color:#fff; text-decoration:none; white-space:nowrap;
+  transition:color .2s var(--ease);
+}
+.store__link:hover{ color:var(--orange); }
+.slide--store:not(.is-active):not(.is-exit-next):not(.is-exit-prev) .store__pic img{ opacity:0; transform:translateX(28px); }
+.store__pic img{ transition:transform .9s var(--ease), opacity .9s var(--ease); }
 
 .slides__arrow{
   position:absolute; z-index:4; top:50%; transform:translateY(-50%);
@@ -237,6 +296,8 @@ strong{ font-weight:600; color:var(--ink); }
 .slides__dots button.is-active::before{ background:var(--orange-d); }
 .slides:has(.slide--photo.is-active) .slides__dots button::before{ background:rgba(255,255,255,.38); }
 .slides:has(.slide--photo.is-active) .slides__dots button.is-active::before{ background:#fff; }
+.slides:has(.slide--store.is-active) .slides__dots button::before{ background:rgba(255,255,255,.38); }
+.slides:has(.slide--store.is-active) .slides__dots button.is-active::before{ background:#fff; }
 
 /* ESET */
 .tile-eset{
@@ -318,7 +379,7 @@ html.intro .nav__in{ opacity:0; }
 }
 
 /* ── AKTUÁLNÍ NABÍDKA ─────────────────────────────────────────────────── */
-.stock{ padding-top:clamp(56px,6.5vw,96px); }
+.sec.stock{ padding-top:clamp(8px,1vw,12px); }
 .stock__head{
   display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between;
   gap:10px 32px; margin-bottom:clamp(22px,2.6vw,34px);
@@ -343,6 +404,71 @@ html.intro .nav__in{ opacity:0; }
 .tile__price{
   margin:auto 0 0; font-family:var(--disp); font-weight:600; font-size:19px;
   color:var(--ink); letter-spacing:-.005em; font-variant-numeric:tabular-nums;
+}
+
+/* Dvojice velkých vstupních dlaždic pod herem (e-shop + ceník) */
+.duo{
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(12px,1.4vw,20px); align-items:stretch;
+}
+.duo__tile{
+  border-radius:18px; overflow:hidden;
+  min-height:clamp(300px,26vw,380px);
+  display:flex; flex-direction:column;
+  transition:transform .5s var(--ease);
+}
+.duo__tile:hover{ transform:translateY(-3px); }
+.duo__tile--shop{
+  background:linear-gradient(180deg, #f3f4f6 0%, #eceef1 100%);
+}
+.duo__tile--price{ background:var(--graphite); }
+.duo__copy{
+  padding:clamp(24px,2.6vw,38px);
+  display:flex; flex-direction:column; align-items:flex-start;
+  height:100%;
+}
+.duo__copy h3{
+  font-size:clamp(24px,2.4vw,36px); line-height:1.02; margin:0 0 10px;
+}
+.duo__tile--price .duo__copy h3{ color:#fff; }
+.duo__copy p{
+  margin:0 0 18px; font-size:clamp(14.5px,1.2vw,16.5px);
+  color:var(--ink-2); max-width:44ch;
+}
+.duo__tile--price .duo__copy p{ color:#b9bfc7; }
+.duo__thumbs{
+  display:flex; gap:12px; align-items:center; margin:2px 0 22px;
+}
+.duo__thumbs img{
+  height:clamp(64px,7vw,96px); width:auto; max-width:180px; object-fit:contain;
+  mix-blend-mode:multiply;
+  transition:transform .6s var(--ease);
+}
+.duo__tile--shop:hover .duo__thumbs img:first-child{ transform:rotate(-2deg) translateY(-3px); }
+.duo__tile--shop:hover .duo__thumbs img:last-child{ transform:rotate(2deg) translateY(-3px); }
+.duo__tile .lines{ width:100%; margin:0 0 22px; }
+.duo__tile--price .lines li{ color:#d7dbe0; }
+.duo__tile--price .lines li > i{ border-bottom-color:rgba(255,255,255,.28); }
+.duo__tile--price .lines li > b{ color:#fff; }
+.duo__tile .btn{ margin-top:auto; }
+.duo__meta:empty{ display:none; }
+.duo__meta{
+  margin:14px 0 0; font-size:12.8px; color:var(--ink-3);
+}
+.duo__tile--price .duo__meta{ color:#8d949e; }
+@media (max-width:719px){
+  .duo{ grid-template-columns:minmax(0,1fr); }
+  .duo__tile{ min-height:280px; }
+  .duo__thumbs img{ height:56px; }
+}
+@media (max-width:640px){
+  .slide--store{ grid-template-rows:auto auto; }
+  .store__top{ grid-template-columns:minmax(0,1fr); }
+  .store__pic img{ aspect-ratio:16 / 10; height:auto; max-height:190px; }
+  .store__map{ height:170px; }
+  .store__map iframe{ height:170px; min-height:170px; }
+  .store__bottom{ padding:18px 22px calc(16px + 56px); }
+  .store__headline{ font-size:clamp(24px,7.4vw,30px); }
 }
 
 /* ── BUTTONS ──────────────────────────────────────────────────────────── */
@@ -391,8 +517,12 @@ html.intro .nav__in{ opacity:0; }
   display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
   gap:clamp(18px,4vw,64px); align-items:end; margin-bottom:clamp(28px,3.4vw,44px);
 }
-.cenik__top h2{ font-size:clamp(28px,3.7vw,50px); letter-spacing:-.005em; margin:0; }
+.cenik__top h1, .cenik__top h2{ font-size:clamp(28px,3.7vw,50px); letter-spacing:-.005em; margin:0; }
 .cenik__top p{ margin:0; font-size:clamp(15.5px,1.2vw,17.5px); color:var(--ink-2); max-width:46ch; }
+.cenik.sec{ padding-top:calc(var(--nav-h) + clamp(24px,4vw,48px)); }
+/* Podstránky (ochrana, razítka): první sekce pod fixní navigací */
+main > .sec:first-child{ padding-top:calc(var(--nav-h) + 12px); }
+.cenik__more{ display:flex; flex-wrap:wrap; gap:10px; margin:clamp(20px,2.4vw,30px) 0 0; }
 
 .ptiles{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(12px,1.4vw,20px); align-items:stretch; }
 .ptile{
@@ -472,7 +602,33 @@ html.intro .nav__in{ opacity:0; }
 .prot__lead{ font-size:clamp(15.5px,1.2vw,17.5px); color:var(--ink-2); max-width:46ch; margin:0 0 clamp(22px,2.6vw,32px); }
 .prot .lines{ border-top:2px solid var(--ink); padding-top:10px; }
 .lines li > span em{ font-style:normal; font-size:13px; color:var(--ink-3); margin-left:6px; }
-.prot__note{ margin:14px 0 0; font-size:12.8px; color:var(--ink-3); }
+.ochrana__title{ font-size:clamp(28px,3.7vw,50px); letter-spacing:-.005em; margin:0 0 16px; }
+.ochrana__lead{ font-size:clamp(15.5px,1.2vw,17.5px); color:var(--ink-2); max-width:52ch; margin:0 0 clamp(18px,2vw,24px); }
+
+/* Balíčky licencí: 4 karty, patka s cenou jako regálový štítek */
+.packs{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(12px,1.4vw,20px); align-items:stretch; margin-bottom:clamp(36px,4.5vw,64px); }
+.pack{
+  display:flex; flex-direction:column; overflow:hidden;
+  background:var(--paper); border-radius:18px;
+  min-height:clamp(400px, 32vw, 460px);
+  transition:transform .5s var(--ease);
+}
+.pack:hover{ transform:translateY(-3px); }
+.pack__body{ flex:1; padding:clamp(22px,2vw,30px) clamp(18px,1.6vw,26px) clamp(18px,1.6vw,24px); }
+.pack__body .ticks{ margin-top:18px; }
+.pack__body .ticks li{ font-size:14px; }
+.pack__name{ font-size:clamp(21px,1.8vw,26px); line-height:1.08; margin:0 0 6px; }
+.pack__scope{ margin:0; font-size:14px; color:var(--ink-3); }
+.prot__h{ font-size:clamp(20px,1.9vw,26px); margin:0 0 16px; }
+.prot__main .ticks{ margin-bottom:6px; }
+.prot__main .ticks li{ font-size:15.2px; margin-bottom:10px; }
+@media (max-width:1180px){
+  .packs{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .pack{ min-height:0; }
+}
+@media (max-width:719px){
+  .packs{ grid-template-columns:minmax(0,1fr); }
+}
 .prot__btns{ display:flex; flex-wrap:wrap; gap:10px; margin-top:clamp(20px,2.4vw,28px); }
 .prot__side h3{ font-size:clamp(20px,1.9vw,26px); margin:clamp(22px,2.4vw,30px) 0 12px; }
 .prot__side p{ font-size:15px; }
@@ -500,34 +656,29 @@ html.intro .nav__in{ opacity:0; }
 /* ── KONTAKT ──────────────────────────────────────────────────────────── */
 .kontakt{ padding-bottom:0; }
 .kx{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:clamp(32px,5vw,84px); align-items:start; }
-.kx__h{ font-size:15px; font-weight:600; letter-spacing:-.01em; margin:0 0 16px; padding-bottom:12px; border-bottom:1px solid var(--line); }
-.kx__col > .kx__h ~ .kx__h{ margin-top:40px; }
-.kx__addr{ font-style:normal; font-size:16.5px; line-height:1.65; margin-bottom:24px; }
+.kx__addr{ font-style:normal; font-size:16.5px; line-height:1.65; margin-bottom:20px; }
 .kx__addr strong{ font-family:var(--disp); font-weight:600; font-size:18px; letter-spacing:-.02em; }
-.kx__dl{ margin:0; font-size:15.2px; }
-.kx__dl > div{ display:grid; grid-template-columns:150px 1fr; gap:16px; padding:9px 0; border-top:1px solid var(--line); }
-.kx__dl dt{ color:var(--ink-3); font-size:14px; }
-.kx__dl dd{ margin:0; color:var(--ink); }
-.kx__dl dd span{ color:var(--ink-3); font-size:13.5px; }
-.kx__dl a{ text-decoration:none; border-bottom:1px solid var(--line-2); }
-.kx__dl a:hover{ color:var(--orange-d); border-bottom-color:var(--orange); }
-.kx__dl--hours dd{ font-variant-numeric:tabular-nums; }
-.kx__status{ display:flex; align-items:center; gap:8px; font-size:14px; color:var(--ink-2); margin:16px 0 0; }
-.kx__shop{ margin:36px 0 0; }
-.kx__shop img{ width:100%; border-radius:10px; }
-.kx__shop figcaption{ font-size:12.8px; color:var(--ink-3); margin-top:10px; }
-
-.people{ list-style:none; margin:0 0 8px; padding:0; }
-.people li{ padding:18px 0; border-bottom:1px solid var(--line); }
-.people li:first-child{ padding-top:0; }
-.people__name{ font-family:var(--disp); font-weight:600; font-size:19px; color:var(--ink); letter-spacing:-.005em; margin:0 0 4px; }
-.people__role{ font-size:13.6px; color:var(--ink-3); margin:0 0 8px; }
+.kx__call{ margin:0 0 6px; }
+.kx__call a{
+  font-family:var(--disp); font-weight:700; font-size:clamp(26px,2.6vw,34px);
+  letter-spacing:-.01em; color:var(--ink); text-decoration:none; font-variant-numeric:tabular-nums;
+}
+.kx__call a:hover{ color:var(--orange-d); }
+.kx__mail{ margin:0 0 18px; font-size:16.5px; }
+.kx__mail a{ color:var(--ink); text-decoration:none; border-bottom:1px solid var(--line-2); }
+.kx__mail a:hover{ color:var(--orange-d); border-bottom-color:var(--orange); }
+.kx__hours{ margin:0; font-size:15.2px; color:var(--ink); font-variant-numeric:tabular-nums; }
+.kx__status{ display:flex; align-items:center; gap:8px; font-size:14px; color:var(--ink-2); margin:10px 0 0; }
+.people{ list-style:none; margin:18px 0 0; padding:0; }
+.people li{ padding:12px 0; border-top:1px solid var(--line); }
+.people__name{ font-family:var(--disp); font-weight:600; font-size:17px; color:var(--ink); letter-spacing:-.005em; margin:0 0 4px; }
+.people__name span{ font-family:var(--body); font-weight:400; font-size:13.6px; color:var(--ink-3); letter-spacing:0; }
 .people__c{ margin:0; font-size:15px; }
-.people__c a{ text-decoration:none; border-bottom:1px solid var(--line-2); }
+.people__c a{ text-decoration:none; border-bottom:1px solid var(--line-2); font-variant-numeric:tabular-nums; }
 .people__c a:hover{ color:var(--orange-d); border-bottom-color:var(--orange); }
+.kx__fine{ margin:20px 0 0; font-size:13px; color:var(--ink-3); }
 
 .form{ margin-top:4px; }
-.form__row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
 .field{ display:block; margin-bottom:14px; }
 .field span{ display:block; font-size:13.2px; color:var(--ink-3); margin-bottom:6px; }
 .field input, .field select, .field textarea{
@@ -634,7 +785,133 @@ html.intro .nav__in{ opacity:0; }
   .stock__head{ display:block; }
   .stock__head p{ margin-top:8px; }
   .form__row{ grid-template-columns:1fr; gap:0; }
-  .kx__dl > div{ grid-template-columns:1fr; gap:2px; }
   .foot__top{ grid-template-columns:1fr; }
   .foot__brand{ grid-column:span 1; }
+}
+
+/* ── MOBILNÍ VERZE ────────────────────────────────────────────────────── */
+/* Na telefonu: vodorovné posuvné řady místo dlouhých sloupců, kompaktní dlaždice,
+   dotykové plochy aspoň 44 px, formulář bez přiblížení na iPhonu, bezpečné okraje. */
+.burger{ width:44px; height:44px; }
+.callbar svg{ width:17px; height:17px; flex:0 0 auto; }
+.ptiles__dots{ display:none; }
+
+@media (max-width:900px){
+  .callbar a{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    font-family:var(--ui); font-weight:600;
+    padding:14px 8px calc(14px + env(safe-area-inset-bottom));
+  }
+  .foot{ padding-bottom:calc(56px + env(safe-area-inset-bottom)); }
+  .wm{ bottom:calc(66px + env(safe-area-inset-bottom)); }
+}
+
+@media (max-width:640px){
+  .sec{ padding-block:48px; }
+  .sec.stock{ padding-top:10px; }
+
+  /* hero */
+  .slides{ height:560px; }
+  .slide__h{ font-size:clamp(32px, 9vw, 40px); }
+  .slide__sub{ font-size:15px; margin-bottom:18px; }
+  .slide__tag{ margin-bottom:12px; }
+  .slides__dots{ bottom:19px; }
+  .slides__dots button{ height:32px; }
+  .slides__dots button::before{ top:14px; }
+  .tile-eset, .tile-stamp{ min-height:228px; }
+  .tile-eset h2, .tile-stamp h2{ font-size:24px; }
+  .tile-eset p{ font-size:13.6px; margin-bottom:14px; }
+  .ticks{ margin-bottom:14px; }
+  .ticks li{ font-size:13.8px; margin-bottom:5px; }
+  .pbadge{ width:68px; font-size:15px; }
+
+  /* produkty a ceník: dlaždice vedle sebe, posun prstem, vykukuje další */
+  .products, .ptiles{
+    display:grid; grid-template-columns:none; grid-auto-flow:column;
+    overflow-x:auto; overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory; scrollbar-width:none;
+    margin-inline:calc(var(--pad) * -1); padding:2px var(--pad) 6px;
+    scroll-padding-inline:var(--pad);
+  }
+  .products::-webkit-scrollbar, .ptiles::-webkit-scrollbar{ display:none; }
+  .products{ grid-auto-columns:62%; gap:10px; }
+  .ptiles{ grid-auto-columns:86%; gap:12px; align-items:stretch; }
+  .products > *, .ptiles > *{ scroll-snap-align:start; }
+  .ptiles__dots{ display:flex; justify-content:center; gap:6px; margin:14px 0 0; }
+  .ptiles__dots span{
+    width:7px; height:7px; border-radius:4px; background:var(--line-2);
+    transition:width .25s var(--ease), background .25s var(--ease);
+  }
+  .ptiles__dots span.is-active{ width:22px; background:var(--orange-d); }
+
+  /* pomoc na dálku */
+  .remote__steps li{ padding:12px 0; gap:14px; }
+  .remote__steps p{ font-size:15px; }
+
+  /* licence ESET: „1 PC na 1 rok" pod názvem, vodicí linka zůstává na prvním řádku */
+  .prot .lines li > span em{ display:block; margin:2px 0 0; }
+  .prot .lines li > i{ align-self:flex-start; margin:1.05em 0 0; }
+
+  /* razítka: tabulka se na telefonu mění v seznam */
+  .stamp__tablewrap{ overflow:visible; }
+  .rtab{ min-width:0; }
+  .rtab thead{ display:none; }
+  .rtab, .rtab tbody{ display:block; }
+  .rtab tbody tr{ display:flex; flex-wrap:wrap; align-items:baseline; padding:12px 0; }
+  .rtab tbody tr:hover{ background:none; }
+  .rtab tbody th{ order:1; flex:1 1 55%; padding:0; font-size:16px; }
+  .rtab tbody td{
+    order:3; padding:0; margin:4px 14px 0 0; text-align:left;
+    font-family:var(--body); font-weight:400; font-size:13px; color:var(--ink-3);
+  }
+  .rtab tbody td::before{ content:attr(data-label) " "; }
+  .rtab tbody td::after{ content:" Kč"; }
+  .rtab tbody td[data-label="Komplet"]{
+    order:2; flex:0 0 45%; margin:0; text-align:right;
+    font-family:var(--disp); font-size:17px; font-weight:600; color:var(--ink);
+  }
+  .rtab tbody td[data-label="Komplet"]::before{
+    content:"komplet "; font-family:var(--body); font-size:12px; font-weight:400; color:var(--ink-3);
+  }
+
+  /* kontakt */
+  .kx__col > .kx__h ~ .kx__h{ margin-top:30px; }
+  .field input, .field select, .field textarea{ font-size:16px; }
+  .mapwrap{ height:240px; margin-top:40px; }
+
+  /* patička */
+  .foot__nav{ display:grid; grid-template-columns:1fr 1fr; gap:10px 18px; }
+}
+
+/* dotykové plochy a jemné doladění mobilu */
+.ptile__go{ padding-block:11px; margin-block:-11px; }
+@media (max-width:640px){
+  .slides__arrow{ width:44px; height:44px; }
+  .slides__arrow--prev{ right:66px; }
+  .slides__dots{ bottom:13px; }
+  .slides__dots button{ height:44px; }
+  .slides__dots button::before{ top:20px; }
+  .prot .lines li > i{ margin-top:calc(1.05em + 4px); }
+}
+
+/* ── HLAVIČKA NA TABLETU A TELEFONU ───────────────────────────────────── */
+/* Skryté odkazy jsou v DOM pořád sousedem, takže „.nav__links + .nav__right" držel pevný
+   levý okraj a stav s menu se lepily k logu. Tady je odtlačíme zpět k pravému okraji
+   a čáry hamburgeru srovnáme s okrajem stránky. */
+@media (max-width:1080px){
+  .nav__links + .nav__right{ margin-left:auto; }
+  .burger{ margin-right:-11px; }
+}
+
+/* ── TISK A PDF: vodoznak přes každou stránku ─────────────────────────── */
+@media print{
+  .nav, .callbar, .drawer, .slides__arrow, .slides__dots{ display:none !important; }
+  .wm{
+    position:fixed; inset:0; z-index:9999;
+    display:grid; place-items:center;
+    font-size:64px; font-weight:700; line-height:1; letter-spacing:.02em; white-space:nowrap;
+    color:#000; opacity:.1; mix-blend-mode:normal; transform:rotate(-28deg);
+    pointer-events:none;
+  }
+  .wm::after{ content:" · © 2026"; }
 }

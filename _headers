@@ -1,0 +1,15 @@
+# MAX COMPUTER · © 2026 Aetheron
+# Hlavičky pro Netlify a Cloudflare Pages. GitHub Pages je ignoruje.
+# Backend (server.js) posílá stejné hlavičky dynamicky — toto je pro statický hosting.
+/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
+  X-Frame-Options: SAMEORIGIN
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; frame-src https://maps.google.cz https://www.google.com; frame-ancestors 'self'
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Content-Type-Options: nosniff
+/admin/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+/api/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
